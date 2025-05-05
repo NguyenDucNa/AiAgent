@@ -1,0 +1,32 @@
+version: 1
+handlers:
+  logstash_error:
+    client:
+      url: http://testlogapi.misa.com.vn
+      username: elastic
+      password: 12345678@Abc
+    levels:
+      allow:
+        - INFO
+        - ERROR
+    fields:
+      app_id: misajsc-langgraph-api  # Replace with your app_id
+      app_version: 1.0.0  # Replace with your app_version
+      database_id: ""
+      system_id: api
+      env: test  # (dev, test, staging, production)
+  logstash_business:
+    client:
+      url: http://testlogapi.misa.com.vn
+      username: elastic
+      password: 12345678@Abc
+    levels:
+      allow:
+        - TRACE
+        - DEBUG
+    fields:
+      app_id: misajsc-langgraph-api  # Replace with your app_id
+      app_version: 1.0.0  # Replace with your app_version
+      database_id: ""
+      system_id: api
+      env: test  # (dev, test, staging, production)

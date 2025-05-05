@@ -1,0 +1,4 @@
+secret_key: sk-lf-b9492b57-a6c0-485d-b03b-9c6924cea575
+public_key: pk-lf-ae14acf5-7988-4465-a802-11fe1bda7922
+host: http://10.0.6.135:3000
+trace_name: MAKT

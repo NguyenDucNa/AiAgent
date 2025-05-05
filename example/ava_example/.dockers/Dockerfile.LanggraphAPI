@@ -1,0 +1,25 @@
+FROM langchain/langgraph-api:3.11
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+ADD requirements.txt /deps/__outer_MISA.JSCAgent/src/requirements.txt
+RUN PYTHONDONTWRITEBYTECODE=1 pip install --no-cache-dir -c /api/constraints.txt -r /deps/__outer_MISA.JSCAgent/src/requirements.txt
+ADD . /deps/__outer_MISA.JSCAgent/src
+RUN set -ex && \
+    for line in '[project]' \
+                'name = "MISA.JSCAgent"' \
+                'version = "0.1"' \
+                '[tool.setuptools.package-data]' \
+                '"*" = ["**/*"]'; do \
+        echo "$line" >> /deps/__outer_MISA.JSCAgent/pyproject.toml; \
+    done
+RUN PYTHONDONTWRITEBYTECODE=1 pip install --no-cache-dir -c /api/constraints.txt -e /deps/*
+ENV LANGSERVE_GRAPHS='{"agent": "/deps/__outer_MISA.JSCAgent/src/misajsc/agent.py:graph"}'
+RUN cp /deps/__outer_MISA.JSCAgent/src/misajsc/custom/validation.py /api/langgraph_license/validation.py
+RUN cp /deps/__outer_MISA.JSCAgent/src/misajsc/custom/validation.pyc /api/langgraph_license/validation.pyc
+RUN cp /deps/__outer_MISA.JSCAgent/src/misajsc/custom/metadata.py /api/langgraph_api/metadata.py
+RUN cp /deps/__outer_MISA.JSCAgent/src/misajsc/custom/metadata.pyc /api/langgraph_api/metadata.pyc
+RUN cp /deps/__outer_MISA.JSCAgent/src/misajsc/custom/base.py /usr/local/lib/python3.11/site-packages/langchain_core/runnables/base.py
+RUN cp -r /deps/__outer_MISA.JSCAgent/src/misajsc/.cache/data-gym-cache /tmp/data-gym-cache
+ENV LANGCHAIN_TRACING_V2=false
+WORKDIR /deps/__outer_MISA.JSCAgent/src

@@ -1,0 +1,14 @@
+workflow_url: https://thidiemavaapp.misa.vn/v1/workflows/run
+workflows:
+  add_customer_supplier: app-0abggBbNMQ9mmXShoAG8yy8Q
+  user_management: app-kTnetYVw6i33IiQuzsiTCt61
+  accounting_voucher: app-O9h6YwLl21iWTuKTQQ9gCHEA
+  create_financial_report: app-lgvDs01jqkwlSQjXn4vT6iil
+  tax_declaration: app-eAQrkbTkgcxxv6EnbwI1zepM
+  debt_information: app-WYNrh8SGcfvRF2oIAgS5HXm0
+  overdue_receivable: app-JkGoS83NlrODqSRQhzI9pf2M
+  product_information: app-TXNLbND2i8zPX8yuBr1Fznyz
+  revenue_information: app-fqsze5EbCUjVYJ86vUHuzLRC
+  misa_crm_search_knowledge:
+   api_key: "your-api-key-here"
+   url: "https://aiservice.misa.vn/chatbot-api/v1/search"

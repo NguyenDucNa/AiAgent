@@ -1,0 +1,10 @@
+version: "3.4"
+services:
+  makt-langgraph-api:
+    env_file: .env
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: .dockers/Dockerfile.API
+    image: misadockerhub-harbor.vn/aiteam-nlp/makt-langgraph-api:0.0.1
+    network_mode: host

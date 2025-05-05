@@ -1,0 +1,36 @@
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 as base
+
+USER root
+
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update -qq && \
+    apt-get install -y \
+    curl \
+    telnet \
+    wget \
+    default-jre \
+    build-essential\
+    ca-certificates
+
+RUN apt-get install -y \
+    python3.11 python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --upgrade pip
+COPY embedding/requirements.txt /app/requirements.txt
+RUN pip3 install -U --no-cache-dir -r /app/requirements.txt
+
+WORKDIR /app
+
+RUN chgrp -R 0 /app && chmod -R g=u /app
+
+USER 1001
+
+COPY embedding/models /app/models
+COPY embedding/app.py /app/app.py
+
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
+CMD ["python3", "app.py"]

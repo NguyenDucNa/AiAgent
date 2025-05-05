@@ -1,0 +1,21 @@
+langgraph==0.2.73
+motor==3.7.0
+pymongo==4.11.3
+redis==5.0.3
+langfuse==2.46.0
+transformers==4.50.2
+Jinja2==3.1.4
+pytz==2025.1
+thefuzz==0.22.1
+fastapi==0.115.8
+sse-starlette==2.2.1
+uvicorn==0.34.0
+langchain==0.3.19
+pydantic_settings==2.7.1
+langchain_openai==0.3.6
+langchain-cohere==0.4.2
+langchain_google_genai==2.0.9
+google-genai==1.5.0
+mysql-connector-python==9.1.0
+misa-logging @ http://rd-pypi.misa.local/packages/misa_logging-1.1.0.tar.gz
+Levenshtein==0.27.1

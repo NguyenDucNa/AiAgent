@@ -1,0 +1,5 @@
+connection:
+  host: "mongodb://10.0.6.92:27017/?directConnection=true"
+  username: null
+  password: null
+db_name: "AI-Agent-MAKT"

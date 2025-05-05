@@ -1,0 +1,39 @@
+FROM python:3.11-slim as base
+
+USER root
+
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update -qq && \
+    apt-get install -y \
+    curl \
+    telnet \
+    wget \
+    default-jre \
+    build-essential\
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip
+COPY requirements.txt /app/requirements.txt
+RUN pip install -U --no-cache-dir -r /app/requirements.txt
+RUN pip install streamlit==1.38.0
+RUN pip install st-star-rating==0.0.6
+
+RUN chgrp -R 0 /app && chmod -R g=u /app
+COPY settings /app/settings
+COPY misajsc /app/misajsc
+COPY app.py /app/app.py
+COPY misajsc/custom/chat_base_openai.py /usr/local/lib/python3.11/site-packages/langchain_openai/chat_models/base.py
+COPY misajsc/custom/chat_base_cohere.py /usr/local/lib/python3.11/site-packages/langchain_cohere/chat_models.py
+
+RUN mkdir /app/logs
+
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
+WORKDIR /app
+
+USER 1001
+
+CMD ["python", "-m", "streamlit", "run", "app.py", "--browser.gatherUsageStats", "false"]
