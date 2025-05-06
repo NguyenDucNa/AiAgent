@@ -149,3 +149,7 @@ tests/
 lab/
 data/
 venv/
+
+# Ignore all YAML files
+*.yaml
+*.yml
