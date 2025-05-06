@@ -8,7 +8,7 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import tool
 from langgraph.prebuilt import InjectedState
 
-from example.ava_example.src.config import settings
+from src.config import settings
 
 class Input(BaseModel):
     user_query: str = Field(

@@ -4,8 +4,8 @@ project_root = os.path.abspath(os.path.join(
     os.path.dirname(__file__), "../../../../.."))
 sys.path.append(project_root)
 
-from example.ava_example.src.tools.action import action_tools
-from example.ava_example.src.tools.general import general_tools    
+from src.tools.action import action_tools
+from src.tools.general import general_tools    
 from langchain_core.tools import tool
 
 

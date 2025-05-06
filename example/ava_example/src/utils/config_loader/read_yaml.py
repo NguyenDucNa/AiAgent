@@ -3,7 +3,7 @@ from pathlib import Path
 import yaml
 
 # from src.utils.config import settings
-from example.ava_example.src.utils.config_loader.config_interface import ConfigReaderInterface
+from src.utils.config_loader.config_interface import ConfigReaderInterface
 # from src.utils.config_loader.serializer import Struct
 
 

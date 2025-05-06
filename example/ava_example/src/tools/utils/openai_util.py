@@ -60,6 +60,23 @@ class OpenAIGenerator():
         # logger.debug(f"Extracted text from image: {extracted_text}")
         return extracted_text
     
+
+    def structure_response(self, model: str, messages: List[Dict[Text, Text]], response_format):
+        """
+         Structure response from OpenAI API.
+
+         Args:
+            :param messages: List of messages to send
+            :param response_format: Response format, use Pydantic BaseModel
+        """
+        completion = self.client.beta.chat.completions.parse(
+            model=model,
+            messages=messages,
+            response_format=response_format,
+        )
+        message = completion.choices[0].message
+        return message
+    
     def suggest_solutions(
         self,
         error_text: str
